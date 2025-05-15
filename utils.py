@@ -12,8 +12,8 @@ df = pd.DataFrame(data)
 
 def connect_survey_cto(): 
     server_name = "survey.wb"
-    username = "eric.j.lysenko@gmail.com"
-    password = "peshax-hakGem-gexzo1"
+    username = ""
+    password = ""
 
     scto = pcto.SurveyCTOObject(server_name, username, password)
     return scto
