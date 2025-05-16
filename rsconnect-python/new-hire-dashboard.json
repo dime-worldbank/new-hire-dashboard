@@ -1,0 +1,12 @@
+{
+    "https://datanalytics.worldbank.org/": {
+        "server_url": "https://datanalytics.worldbank.org/",
+        "filename": "/Users/elysenko/Library/CloudStorage/OneDrive-WBG/Documents/GitHub/new-hire-dashboard",
+        "app_url": "https://datanalytics.worldbank.org/content/aebd4486-d27c-42e4-9881-572f1cf91541/",
+        "app_id": "aebd4486-d27c-42e4-9881-572f1cf91541",
+        "app_guid": "aebd4486-d27c-42e4-9881-572f1cf91541",
+        "title": "new-hire-dashboard",
+        "app_mode": "python-streamlit",
+        "app_store_version": 1
+    }
+}
