@@ -6,7 +6,7 @@
     "entrypoint": "app"
   },
   "python": {
-    "version": "3.11.9",
+    "version": "3.12.7",
     "package_manager": {
       "name": "pip",
       "version": "24.2",
@@ -16,9 +16,6 @@
   "files": {
     "requirements.txt": {
       "checksum": "1a0f2cbb15c2dda539af94860346f8b9"
-    },
-    ".DS_Store": {
-      "checksum": "1ff042a44b109ebada44a0a84c9e5717"
     },
     ".gitignore": {
       "checksum": "ab1450147c80e886825320faac976c16"
