@@ -1,56 +1,30 @@
-import os.path
-
-import altair as alt
-import pandas as pd
 import streamlit as st
+import pandas as pd
+import utils
 
-HERE = os.path.dirname(os.path.abspath(__file__))
+if "dataset" not in st.session_state:
+    st.session_state["dataset"] = utils.read_dataset()
 
-st.title("Top 5%" " income share")
-st.markdown("Share of income received by the richest 5%" " of the population.")
-DATA = os.path.join(HERE, "data.csv")
+# Mock data – replace with actual data loading
+df = st.session_state['dataset']
 
+# Streamlit app
+st.set_page_config(page_title="DIME Onboarding Tracker", layout="wide")
+st.title("DIME Onboarding Dashboard")
+st.markdown("Use the table below to view onboarding statuses. You can sort or search any column.")
 
-@st.cache_data
-def load_data(nrows):
-    return pd.read_csv("./data.csv", nrows=nrows)
+# Search functionality
+search_term = st.text_input("Search")
 
+if search_term:
+    filtered_df = df[df.apply(lambda row: row.astype(str).str.contains(search_term, case=False).any(), axis=1)]
+else:
+    filtered_df = df
+    
+edited_df = st.data_editor(filtered_df, use_container_width=True, num_rows="dynamic") 
+st.markdown("Press Enter or click outside the data before hitting 'Save'.")
+submitted = st.button('Save')
 
-data_load_state = st.text("Loading data...")
-data = load_data(10000)
-data_load_state.text("")
-
-countries = st.multiselect(
-    "Countries",
-    list(sorted({d for d in data["Entity"]})),
-    default=["Australia", "China", "Germany", "Japan", "United States"],
-)
-earliest_year = data["Year"].min()
-latest_year = data["Year"].max()
-min_year, max_year = st.slider(
-    "Year Range",
-    min_value=int(earliest_year),
-    max_value=int(latest_year),
-    value=[int(earliest_year), int(latest_year)],
-)
-filtered_data = data[data["Entity"].isin(countries)]
-filtered_data = filtered_data[filtered_data["Year"] >= min_year]
-filtered_data = filtered_data[filtered_data["Year"] <= max_year]
-
-chart = (
-    alt.Chart(filtered_data)
-    .mark_line()
-    .encode(
-        x=alt.X("Year", axis=alt.Axis(format="d")),
-        y=alt.Y("Percent", axis=alt.Axis(format="~s")),
-        color="Entity",
-        strokeDash="Entity",
-    )
-)
-st.altair_chart(chart, use_container_width=True)
-
-if st.checkbox("Show raw data"):
-    st.subheader("Raw data")
-    st.write(filtered_data)
-
-st.markdown("Source: <https://ourworldindata.org/grapher/top-5-income-share>")
+if submitted:
+    st.session_state['dataset'] = edited_df
+    utils.write_dataset(edited_df)
