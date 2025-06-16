@@ -1,6 +1,6 @@
 # DIME Support New Hire Dashboard
 
-## About this example
+## About
 
 A Streamlit application to view DIME Support Data New Hire Data and make edits
 
@@ -10,7 +10,7 @@ A Streamlit application to view DIME Support Data New Hire Data and make edits
 
 ## Running Locally
 
-`python -m streamlit run app.py`
+`python -m streamlit run Overview.py`
 
 ## Generating Manifest
 
@@ -18,4 +18,4 @@ A Streamlit application to view DIME Support Data New Hire Data and make edits
 
 ## Deploying to posit
 
-`rsconnect deploy streamlit --server https://datanalytics.worldbank.org/ --api-key <API Key> ./`
+git push your changes to have things automatically deploy to the server
