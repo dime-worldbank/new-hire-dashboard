@@ -1,17 +1,21 @@
-# Top 5% income share
+# DIME Support New Hire Dashboard
 
 ## About this example
 
-A Streamlit application makes it easy to transform your analysis into an interactive dashboard using Python so users can ask and answer questions in real-time, without having to touch any code.
-
-
-## Learn more
-
-* [Streamlit Getting Started Guide](https://docs.streamlit.io/en/latest/getting_started.html)
-* [User Guide: Streamlit](https://docs.posit.co/connect/user/streamlit/)
+A Streamlit application to view DIME Support Data New Hire Data and make edits
 
 ## Requirements
 
 * Python version 3.9 or higher
 
-<!-- NOTE: this file is generated -->
+## Running Locally
+
+`python -m streamlit run app.py`
+
+## Generating Manifest
+
+`rsconnect write-manifest streamlit . --overwrite`
+
+## Deploying to posit
+
+`rsconnect deploy streamlit --server https://datanalytics.worldbank.org/ --api-key <API Key> ./`

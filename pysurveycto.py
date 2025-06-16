@@ -763,7 +763,7 @@ class SurveyCTOObject(object):
     
         upload_url = (
             f"https://{self.server_name}.surveycto.com/"
-            f"datasets/{dataset_id}/upload?csrf_token={headers["X-csrf-token"]}"
+            f'datasets/{dataset_id}/upload?csrf_token=' + '{headers[' + 'X-csrf-token' + ']}'
         )
     
         with open(tmp_path, 'rb') as f:
