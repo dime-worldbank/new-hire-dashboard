@@ -56,9 +56,7 @@ def write_dataset(df):
     full_df = update_full_df_from_subset(df)
     
     scto = st.session_state['dime_support_scto']
-    with st.spinner("💾 Saving..."):
-        scto.upload_dataset(full_df, 'dime_new_hires_readwrite')
-        st.success("Upload complete!")
+    scto.upload_dataset(full_df, 'dime_new_hires_readwrite')
     
     # cast everything as string
     
@@ -261,7 +259,8 @@ def boilerplace(section='overview',title = 'DIME Onboarding Tracker'):
         filtered_df = df[df.apply(lambda row: row.astype(str).str.contains(search_term, case=False).any(), axis=1)]
     else:
         filtered_df = df
-        
+    filtered_df['upi'] = filtered_df['upi'].astype(str).str.replace('.0','').str.replace(',','')
+    
     edited_df = st.data_editor(filtered_df, use_container_width=True, num_rows="fixed", hide_index=True,
              column_config = {
                 'name': 'Name',
@@ -335,8 +334,10 @@ def boilerplace(section='overview',title = 'DIME Onboarding Tracker'):
     submitted = st.button('Save')
     
     if submitted:
-        st.session_state[section] = edited_df
-        write_dataset(edited_df)
+        with st.spinner("💾 Saving..."):
+            st.session_state[section] = edited_df
+            write_dataset(edited_df)
+            st.success("Upload complete!")
         
 def get_key():
     with open("UPI.txt", "rb") as key_file:
