@@ -14,7 +14,7 @@ A Streamlit application to view DIME Support Data New Hire Data and make edits
 
 ## Generating Manifest
 
-`rsconnect write-manifest streamlit . --overwrite`
+`rsconnect write-manifest streamlit . --overwrite --entrypoint Overview.py `
 
 ## Deploying to posit
 
