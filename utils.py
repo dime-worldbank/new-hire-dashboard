@@ -46,13 +46,22 @@ def string_csv_to_df(dataset_data):
 
     return df
     
+def update_full_df_from_subset(df_subset):
+    st.session_state['full'].loc[df_subset.index, df_subset.columns] = df_subset
+    
+    return st.session_state['full']
+
+
 def write_dataset(df):
+    full_df = update_full_df_from_subset(df)
+    
     scto = st.session_state['dime_support_scto']
-    scto.upload_dataset(df, 'dime_new_hires_readwrite')
+    with st.spinner("💾 Saving..."):
+        scto.upload_dataset(full_df, 'dime_new_hires_readwrite')
+        st.success("Upload complete!")
     
     # cast everything as string
     
-
     return
 
 def get_subset(cols, fillna={}):
@@ -327,6 +336,7 @@ def boilerplace(section='overview',title = 'DIME Onboarding Tracker'):
     
     if submitted:
         st.session_state[section] = edited_df
+        write_dataset(edited_df)
         
 def get_key():
     with open("UPI.txt", "rb") as key_file:
