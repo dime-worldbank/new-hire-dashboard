@@ -76,3 +76,6 @@ if selected_name.lower() != 'all':
             
     if len(filtered_df) == 1:
         display_attachments(filtered_df.iloc[0])
+        
+        
+        """javascript:void(0);"""
